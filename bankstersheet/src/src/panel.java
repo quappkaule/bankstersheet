@@ -12,5 +12,6 @@ class Panel{
         frame.getContentPane().add(panel);
 
         frame.setVisible(true);
+        System.out.println("Window's up!");
     }
 }
