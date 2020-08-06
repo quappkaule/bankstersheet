@@ -3,5 +3,5 @@ The "bankstersheet" will be a platform to get an overview of your existing stock
 
 # Technical toolkit
 This part describes the used libraries and at best the correct version numbers.
-## JAVA
- -  jdk-12
+## PYTHON
+ -  python 3.8.5
