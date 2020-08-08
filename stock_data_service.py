@@ -23,6 +23,12 @@ class StockDataService:
         print("Try to access dollar stock price of", self.stock_name)
         return self.get_stock_info()['regularMarketPrice']
 
+    def get_stock_history(self, period="1mo", interval="1d", start=None, end=None, prepost=False, actions=True,
+                          auto_adjust=True, back_adjust=False, proxy=None, rounding=True, tz=None, **kwargs):
+        return self.stock_ticker.history(period=period, interval=interval, start=start, end=end, prepost=prepost,
+                                         actions=actions, auto_adjust=auto_adjust, back_adjust=back_adjust, proxy=proxy,
+                                         rounding=rounding, tz=tz, **kwargs)
+
 
 if __name__ == "__main__":
     stocks = 'msft'
@@ -34,3 +40,5 @@ if __name__ == "__main__":
     print("Current price ", stock_data.get_stock_price(), "$")
     print("Detailed stock info:")
     pprint.pprint(stock_data.get_stock_info())
+    print("Stock history for 3 months:")
+    pprint.pprint(stock_data.get_stock_history(period="3mo"))
