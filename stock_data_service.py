@@ -9,8 +9,8 @@ class StockDataService:
 
     def __init__(self, stock_name):
         if not utils_hm.validate_input(str, stock_name):
-            print("ERROR: StockDataService for", stock_name, "not created. Please choose a valid stock_name like"
-                                                             " \"msft\".")
+            print("ERROR: StockDataService object for", stock_name, "not created. Please choose a valid stock_name like"
+                                                                    " \"msft\".")
             return
         self.stock_name = stock_name
         print("Establishing ticker for stock", stock_name)
@@ -25,6 +25,15 @@ class StockDataService:
 
     def get_stock_history(self, period="1mo", interval="1d", start=None, end=None, prepost=False, actions=True,
                           auto_adjust=True, back_adjust=False, proxy=None, rounding=True, tz=None, **kwargs):
+        if not utils_hm.validate_input(str, period, interval):
+            print("ERROR: No stock history for", self.stock_name, "retrieved. Please choose valid \"period\" and "
+                                                                  "\"interval\" strings, like \"period=3mo\".")
+            return
+        if not utils_hm.validate_input(bool, prepost, actions, auto_adjust, back_adjust, rounding):
+            print("ERROR: No stock history for", self.stock_name, "retrieved. Please choose valid bool values for "
+                                                                  "\"prepost\", \"actions\", \"auto_adjust\", "
+                                                                  "\"back_adjust\" or \"rounding\".")
+            return
         return self.stock_ticker.history(period=period, interval=interval, start=start, end=end, prepost=prepost,
                                          actions=actions, auto_adjust=auto_adjust, back_adjust=back_adjust, proxy=proxy,
                                          rounding=rounding, tz=tz, **kwargs)
@@ -42,3 +51,7 @@ if __name__ == "__main__":
     pprint.pprint(stock_data.get_stock_info())
     print("Stock history for 3 months:")
     pprint.pprint(stock_data.get_stock_history(period="3mo"))
+    # TODO // Extract into tests
+    pprint.pprint(stock_data.get_stock_history(period=3))
+    pprint.pprint(stock_data.get_stock_history(rounding="3"))
+    # TODO //
