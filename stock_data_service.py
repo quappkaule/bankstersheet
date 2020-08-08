@@ -1,5 +1,6 @@
 import yfinance as yf
 import pprint
+import utils.hardening_methods as utils_hm
 
 
 class StockDataService:
@@ -7,6 +8,9 @@ class StockDataService:
     stock_ticker = None
 
     def __init__(self, stock_name):
+        if not utils_hm.validate_input(str, stock_name):
+            print("ERROR: Choose valid stock_name like \"msft\".")
+            return
         self.stock_name = stock_name
         print("Establishing ticker for stock", stock_name)
         self.stock_ticker = yf.Ticker(stock_name)
@@ -23,6 +27,9 @@ if __name__ == "__main__":
     stocks = 'msft'
     print("Getting data for", stocks)
     stock_data = StockDataService(stocks)
+    # TODO // Extract into tests
+    stock_data2 = StockDataService(1234)
+    # TODO //
     print("Current price ", stock_data.get_stock_price(), "$")
     print("Detailed stock info:")
     pprint.pprint(stock_data.get_stock_info())
