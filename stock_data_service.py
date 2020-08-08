@@ -9,7 +9,8 @@ class StockDataService:
 
     def __init__(self, stock_name):
         if not utils_hm.validate_input(str, stock_name):
-            print("ERROR: Choose valid stock_name like \"msft\".")
+            print("ERROR: StockDataService for", stock_name, "not created. Please choose a valid stock_name like"
+                                                             " \"msft\".")
             return
         self.stock_name = stock_name
         print("Establishing ticker for stock", stock_name)
