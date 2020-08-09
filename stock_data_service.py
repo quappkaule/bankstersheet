@@ -8,7 +8,7 @@ class StockDataService:
     stock_ticker = None
 
     def __init__(self, stock_name):
-        if not utils_hm.validate_input(str, stock_name):
+        if not utils_hm.valid_input(str, stock_name):
             print("ERROR: StockDataService object for", stock_name, "not created. Please choose a valid stock_name like"
                                                                     " \"msft\".")
             return
@@ -25,11 +25,11 @@ class StockDataService:
 
     def get_stock_history(self, period="1mo", interval="1d", start=None, end=None, prepost=False, actions=True,
                           auto_adjust=True, back_adjust=False, proxy=None, rounding=True, tz=None, **kwargs):
-        if not utils_hm.validate_input(str, period, interval):
+        if not utils_hm.valid_input(str, period, interval):
             print("ERROR: No stock history for", self.stock_name, "retrieved. Please choose valid \"period\" and "
                                                                   "\"interval\" strings, like \"period=3mo\".")
             return
-        if not utils_hm.validate_input(bool, prepost, actions, auto_adjust, back_adjust, rounding):
+        if not utils_hm.valid_input(bool, prepost, actions, auto_adjust, back_adjust, rounding):
             print("ERROR: No stock history for", self.stock_name, "retrieved. Please choose valid bool values for "
                                                                   "\"prepost\", \"actions\", \"auto_adjust\", "
                                                                   "\"back_adjust\" or \"rounding\".")
