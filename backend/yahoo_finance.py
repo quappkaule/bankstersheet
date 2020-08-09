@@ -1,11 +1,10 @@
 import yfinance as yf
-import pprint
 import utils.hardening_methods as utils_hm
 
 
-class StockDataService:
-    stock_name = None
+class YahooStocks:
     stock_ticker = None
+    stock_name = ""
 
     def __init__(self, stock_name):
         if not utils_hm.valid_input(str, stock_name):
@@ -37,21 +36,3 @@ class StockDataService:
         return self.stock_ticker.history(period=period, interval=interval, start=start, end=end, prepost=prepost,
                                          actions=actions, auto_adjust=auto_adjust, back_adjust=back_adjust, proxy=proxy,
                                          rounding=rounding, tz=tz, **kwargs)
-
-
-if __name__ == "__main__":
-    stocks = 'msft'
-    print("Getting data for", stocks)
-    stock_data = StockDataService(stocks)
-    # TODO // Extract into tests
-    stock_data2 = StockDataService(1234)
-    # TODO //
-    print("Current price ", stock_data.get_stock_price(), "$")
-    print("Detailed stock info:")
-    pprint.pprint(stock_data.get_stock_info())
-    print("Stock history for 3 months:")
-    pprint.pprint(stock_data.get_stock_history(period="3mo"))
-    # TODO // Extract into tests
-    pprint.pprint(stock_data.get_stock_history(period=3))
-    pprint.pprint(stock_data.get_stock_history(rounding="3"))
-    # TODO //
